@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Exemple d'utilisation d'un web component</title>
+        <script src="myComponents/index.js" type="module"></script>
+        <LINK rel="stylesheet" type="text/css" href="style.css"></strong>
+    </head>
+    <body>
+        <div>
+            <h1>générateur de logos gauci Thomas</h1>
+            <my-logo id="leLogo" text="MIAOU" couleur="green" animation="jello-horizontal"></my-logo>
+            <br><br><br>
+            <button onclick="randomTexte()">Random</button>
+            <button onclick="brule()">Brule le chat ! </button>
+            <button onclick="nian()">Nyan nyan nyan nyan ! </button>            
+        </div> 
+        <div id="music" style="display:none;">
+            <audio id="audio"
+                controls
+                src="/audio/nyan.mp3">
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+        </div>
+    </body>
+
+    <script>    
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }    
+        let logo = document.querySelector("#leLogo");
+        function randomTexte() {
+            var length = Math.random()*40;
+            var res           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for ( var i = 0; i < length; i++ ) {
+                res += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            logo.changeColor(getRandomColor());
+            logo.changeText(res);
+        }
+        function brule(){
+            logo.changeImg("flammes.gif");
+            logo.changeText("NOOOON");
+        }
+        function nian(){
+            var div = document.getElementById("music");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+            } else {
+                div.style.display = "none";
+            }
+            var audio = document.getElementById("audio");
+            audio.play();
+            logo.changeImg("miaou.gif");
+            logo.changeText("Nyan nyan");
+            logo.nyan()
+        }
+        
+    </script>
+</html>
